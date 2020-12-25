@@ -1,0 +1,68 @@
+import os
+
+import cv2
+
+
+class FileUtil:
+    @staticmethod
+    def project_root_path(project_name=None):
+        """
+        获取当前项目根路径
+        :param project_name:
+        :return: 根路径
+        """
+        PROJECT_NAME = 'shutdown' if project_name is None else project_name
+        project_path = os.path.abspath(os.path.dirname(__file__))
+        root_path = project_path[:project_path.find("{}\\".format(PROJECT_NAME)) + len("{}\\".format(PROJECT_NAME))]
+        return root_path
+
+    def get_fileSize(filePath):
+        fsize = os.path.getsize(filePath)
+        fsize = fsize / float(1024 * 1024)
+        return round(fsize, 2)
+
+
+    def all_path(dirname):
+        result = []  # 所有的文件
+        for maindir, subdir, file_name_list in os.walk(dirname):
+            # print("1:",maindir) #当前主目录
+            # print("2:",subdir) #当前主目录下的所有目录
+            # print("3:",file_name_list)  #当前主目录下的所有文件
+            for filename in file_name_list:
+                apath = os.path.join(maindir, filename)  # 合并成一个完整路径
+                result.append(apath)
+        return result
+
+
+    def screenshot(file):
+        vc = cv2.VideoCapture(file)  # 读取视频文件
+        c = 0
+        print("------------")
+        if vc.isOpened():  # 判断是否正常打开
+            print("yes")
+            rval, frame = vc.read()
+        else:
+            rval = False
+            print("false")
+
+        timeF = 100000  # 视频帧计数间隔频率
+
+        while rval:  # 循环读取视频帧
+            rval, frame = vc.read()
+            print(c, timeF, c % timeF)
+            if (c % timeF == 0):  # 每隔timeF帧进行存储操作
+                print("write...")
+                cv2.imwrite(str(c) + "--2" + '.jpg', frame)  # 存储为图像
+                print("success!")
+            c = c + 100000
+        cv2.waitKey(1)
+        vc.release()
+        print("==================================")
+
+
+    def mkdir(path):
+        folder = os.path.exists(path)
+        if not folder:  # 判断是否存在文件夹如果不存在则创建为文件夹
+            os.makedirs(path)  # makedirs 创建文件时如果路径不存在会创建这个路径
+
+

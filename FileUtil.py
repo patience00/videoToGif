@@ -6,12 +6,7 @@ import cv2
 class FileUtil:
     @staticmethod
     def project_root_path(project_name=None):
-        """
-        获取当前项目根路径
-        :param project_name:
-        :return: 根路径
-        """
-        PROJECT_NAME = 'shutdown' if project_name is None else project_name
+        PROJECT_NAME = 'videoToGif' if project_name is None else project_name
         project_path = os.path.abspath(os.path.dirname(__file__))
         root_path = project_path[:project_path.find("{}\\".format(PROJECT_NAME)) + len("{}\\".format(PROJECT_NAME))]
         return root_path
@@ -33,31 +28,6 @@ class FileUtil:
                 result.append(apath)
         return result
 
-
-    def screenshot(file):
-        vc = cv2.VideoCapture(file)  # 读取视频文件
-        c = 0
-        print("------------")
-        if vc.isOpened():  # 判断是否正常打开
-            print("yes")
-            rval, frame = vc.read()
-        else:
-            rval = False
-            print("false")
-
-        timeF = 100000  # 视频帧计数间隔频率
-
-        while rval:  # 循环读取视频帧
-            rval, frame = vc.read()
-            print(c, timeF, c % timeF)
-            if (c % timeF == 0):  # 每隔timeF帧进行存储操作
-                print("write...")
-                cv2.imwrite(str(c) + "--2" + '.jpg', frame)  # 存储为图像
-                print("success!")
-            c = c + 100000
-        cv2.waitKey(1)
-        vc.release()
-        print("==================================")
 
 
     def mkdir(path):

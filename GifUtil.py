@@ -11,4 +11,4 @@ class GifUtil:
         frames = []
         for image_name in images:
             frames.append(imageio.imread(image_name))
-        imageio.mimsave(gif_name, frames, 'GIF', duration=0.3)
+        imageio.mimsave(gif_name, frames, 'GIF', duration=0.4)

@@ -11,7 +11,7 @@ Error on InputStream.reset() or skip(): java.io.IOException: Resetting to invali
 
 Python可以使用moviepy库的subclip(),但是只能生成某个时间片段的gif,不够灵活
 
-该脚本是先遍历视频所有帧,跳帧截取生成图片,最后根据图片再合成gif
+这个脚本是先遍历视频所有帧,跳帧截取生成图片,最后根据图片再合成gif
 
 
 

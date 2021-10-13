@@ -17,9 +17,5 @@ Python可以使用moviepy库的subclip(),但是只能生成某个时间片段的
 
 如何使用:
 
-运行main.py修改视频的目录和你想生成gif的目录即可
-
-```python
-FrameToGif.toGif("I:\\", "F:\\video_gif\\")
-```
+运行main.py选择视频文件或者视频的目录
 

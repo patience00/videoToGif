@@ -2,6 +2,8 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import os
+
 from FrameToGif import FrameToGif
 from tkinter import *
 import tkinter as tk
@@ -37,6 +39,8 @@ def selectFile():
     Label(window, text='一共'+str(totalFrameCount)+'帧').grid(row=1, column=0)
 
     FrameToGif.videoToGif(filePath, savePath, frameNumber)
+    os.system("explorer.exe %s" % savePath)
+    os.startfile(savePath)
 
 
 def savePath():
@@ -44,7 +48,7 @@ def savePath():
     global savePath
     savePath = path_
     print('保存的路径', savePath)
-    path.set(savePath)
+    Label(window, text=savePath).grid(row=0, column=1)
 
 
 # Press the green button in the gutter to run the script.
@@ -58,16 +62,16 @@ if __name__ == '__main__':
     Label(window, text="gif保存路径:").grid(row=0, column=0)
     Button(window, text="选择目录", command=savePath).grid(row=0, column=2)
 
-    Label(window, text="目标路径:").grid(row=1, column=0)
-    Entry(window, textvariable=path).grid(row=0, column=1)
+    # Label(window, text="目标路径:").grid(row=2, column=0)
+    # Entry(window, textvariable=path).grid(row=1, column=1)
 
     # 第二行
-    Label(window, text="隔多少帧截取图片:").grid(row=2, column=0)
+    Label(window, text="隔多少帧截取图片:").grid(row=1, column=0)
     frame = Entry(window)
-    frame.grid(row=2, column=1)
+    frame.grid(row=1, column=1)
     # 按钮
-    Button(window, text="选择文件夹", command=selectPath).grid(row=1, column=2)
-    Button(window, text="选择文件", command=selectFile).grid(row=2, column=2)
+    # Button(window, text="选择文件夹", command=selectPath).grid(row=1, column=2)
+    Button(window, text="选择文件", command=selectFile).grid(row=1, column=2)
     window.mainloop()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

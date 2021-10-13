@@ -102,13 +102,13 @@ class FrameToGif:
                 frameIndex += 1
                 if frameIndex - i > frameNumber:
                     i = frameIndex + frameNumber
-                print("current frame:{},i={}", frameIndex, i)
+                # print("current frame:{},i={}", frameIndex, i)
                 # 当前帧数大于需要截取的片段帧，并且小于总的帧数
 
                 if frameIndex >= i & i <= frame_count:
                     # 隔400帧截取一张
                     if (i - frameIndex) % 500 == 0:
-                        print("shot,current frame:{},i={}", frameIndex, i)
+                        # print("shot,current frame:{},i={}", frameIndex, i)
                         # 截图的文件名
                         cv2.imwrite(os.path.join(imagePath, str(frameIndex)) + '.jpg', frame)  # 存储为图像
                         shotCount += 1

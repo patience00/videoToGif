@@ -80,7 +80,10 @@ class FrameToGif:
 
         print("mkdir:", diction)
         newPath = Path(diction)
-        os.mkdir(diction)
+        if os.path.exists(diction):
+            print("文件夹已存在")
+        else:
+            os.mkdir(diction)
         # vc = cv2.VideoCapture("I:\123.mp4")  # 读取视频文件
         vc = cv2.VideoCapture(moviePath)  # 读取视频文件
         frame_count = vc.get(cv2.CAP_PROP_FRAME_COUNT)

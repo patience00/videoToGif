@@ -66,7 +66,7 @@ def read_frame_as_jpeg(in_file, frame_num):
     指定帧数读取任意帧
     """
     out, err = (
-        ffmpeg.input(in_file)
+        in_file
             .filter('select', 'gte(n,{})'.format(frame_num))
             .output('pipe:', vframes=1, format='image2', vcodec='mjpeg')
             .run(capture_stdout=True)
@@ -106,21 +106,20 @@ def videoToGif(moviePath=None, createGifPath=None):
     total_frames = int(video_info['nb_frames'])
     print("frame_count:", total_frames)
 
-    eachFrameNumber = int(total_frames / 25)
-    frameIndex = int(total_frames / 30)
+    eachFrameNumber = int(total_frames / 50)
+    frameIndex = int(total_frames / 60)
     imagePath = os.path.join(createGifPath, fileName)
     i = 0
-    while i <= 25:
+    ffmpegInput = ffmpeg.input(moviePath)
+    while i < 40:
         frameIndex = random.randint(frameIndex, frameIndex + eachFrameNumber)
-        frame = read_frame_as_jpeg(moviePath, frameIndex)
-        # cv2.imwrite(os.path.join(imagePath, str(frameIndex)) + '.jpg', frame)
+        frame = read_frame_as_jpeg(ffmpegInput, frameIndex)
         gifFIle = open(os.path.join(imagePath, str(frameIndex)) + '.jpg', "wb")
         gifFIle.write(frame)
         print('截取帧:', frameIndex)
         i += 1
 
-    cv2.waitKey()
-    print("==================================耗时:", (time.time() - start) / 1000)
+    print("==================================耗时:%d秒", (time.time() - start))
     gifName = diction + '.gif'
     GifUtil.images2Gif(imagePath, gifName)
 

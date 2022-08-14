@@ -71,8 +71,9 @@ class FrameToGif:
         frame_count = vc.get(cv2.CAP_PROP_FRAME_COUNT)
         return frame_count
 
+
     @staticmethod
-    def videoToGif(moviePath=None, createGifPath=None, frameNumber=None, frameJump=None):
+    def videoToGif(moviePath=None, createGifPath=None,startFrameNumber=None, frameNumber=None, frameJump=None):
         start = time.time()
         fileName = os.path.basename(moviePath)
         print("file name:", fileName)
@@ -95,7 +96,7 @@ class FrameToGif:
             rval = False
             raise Exception("file error")
         # 开始截取的首帧
-        i = int(frame_count / 5)
+        i = startFrameNumber
         shotCount = 0
         frameIndex = 0
         # gif保存的路径
@@ -130,3 +131,12 @@ class FrameToGif:
         GifUtil.images2Gif(imagePath, gifName)
 
     print("success")
+
+    @staticmethod
+    def jpgToGif(moviePath=None, createGifPath=None):
+        fileName = os.path.basename(moviePath)
+        imagePath = os.path.join(createGifPath, fileName)
+        diction = os.path.join(createGifPath, fileName)
+        gifName = diction + '.gif'
+        GifUtil.images2Gif(imagePath, gifName)
+

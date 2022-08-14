@@ -111,7 +111,7 @@ def videoToGif(moviePath=None, createGifPath=None):
     imagePath = os.path.join(createGifPath, fileName)
     i = 0
     ffmpegInput = ffmpeg.input(moviePath)
-    while i < 40:
+    while i < 25:
         frameIndex = random.randint(frameIndex, frameIndex + eachFrameNumber)
         frame = read_frame_as_jpeg(ffmpegInput, frameIndex)
         gifFIle = open(os.path.join(imagePath, str(frameIndex)) + '.jpg', "wb")

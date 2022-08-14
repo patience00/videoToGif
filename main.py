@@ -45,16 +45,21 @@ def startGif():
     global filePath
     global savePath
 
-    frameNumber = frame.get()
+    startFrameNumber = int(startFrame.get())
+    frameNumber = int(frame.get())
     frameJump = int(frame2.get())
     print('选择的文件:', filePath)
     print('保存的路径:', savePath)
     print('隔多少帧截取一个片段:', frameNumber)
     print('一个片段中隔多少帧截取:', frameNumber)
 
-    frameNumber = int(frameNumber)
-    FrameToGif.videoToGif(filePath, savePath, frameNumber, frameJump)
+    FrameToGif.videoToGif(filePath, savePath,startFrameNumber, frameNumber, frameJump)
     os.startfile(savePath)
+
+def startJpgToGif():
+    global filePath
+    global savePath
+    FrameToGif.jpgToGif(filePath,savePath)
 
 
 def selectSavePath():
@@ -86,18 +91,23 @@ if __name__ == '__main__':
     # Entry(window, textvariable=path).grid(row=1, column=1)
 
     # 第二行
-    Label(window, text="隔多少帧截取一个片段:").grid(row=2, column=0)
+    Label(window, text="开始帧:").grid(row=2, column=0)
+    Label(window, text="隔多少帧截取一个片段:").grid(row=3, column=0)
     # 第三行
-    Label(window, text="一个片段中隔多少帧截取:").grid(row=3, column=0)
+    Label(window, text="一个片段中隔多少帧截取:").grid(row=4, column=0)
+    startFrame = Entry(window)
     frame = Entry(window)
-    # 给第二行添加输入框
-    frame.grid(row=2, column=1)
+    startFrame.grid(row=2,column=1)
+
+    # 给第3行添加输入框
+    frame.grid(row=3, column=1)
     # 给第3行添加输入框
     frame2 = Entry(window)
-    frame2.grid(row=3, column=1)
+    frame2.grid(row=4, column=1)
 
     # Button(window, text="选择文件夹", command=selectPath).grid(row=1, column=2)
-    Button(window, text="开始", command=startGif).grid(row=4, column=0)
+    Button(window, text="开始抽帧", command=startGif).grid(row=5, column=0)
+    Button(window, text="开始合成gif", command=startJpgToGif).grid(row=6, column=0)
 
     window.mainloop()
 

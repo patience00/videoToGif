@@ -73,7 +73,7 @@ class FrameToGif:
 
 
     @staticmethod
-    def videoToGif(moviePath=None, createGifPath=None,startFrameNumber=None, frameNumber=None, frameJump=None):
+    def videoToGif(moviePath=None, createGifPath=None,startFrameNumber=None, frameNumber=None, frameJump=None, frameTotal=None):
         start = time.time()
         fileName = os.path.basename(moviePath)
         print("file name:", fileName)
@@ -118,7 +118,7 @@ class FrameToGif:
                     print('截取帧:', frameIndex)
                     shotCount += 1
                     # 最大25张图片合成gif
-                    if shotCount > 25:
+                    if shotCount > frameTotal:
                         break
                 # 跳过片段再次截取图片
             else:

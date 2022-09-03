@@ -48,12 +48,13 @@ def startGif():
     startFrameNumber = int(startFrame.get())
     frameNumber = int(frame.get())
     frameJump = int(frame2.get())
+    frameTotal = int(frameTotalBox.get())
     print('选择的文件:', filePath)
     print('保存的路径:', savePath)
     print('隔多少帧截取一个片段:', frameNumber)
     print('一个片段中隔多少帧截取:', frameNumber)
 
-    FrameToGif.videoToGif(filePath, savePath,startFrameNumber, frameNumber, frameJump)
+    FrameToGif.videoToGif(filePath, savePath,startFrameNumber, frameNumber, frameJump,frameTotal)
     os.startfile(savePath)
 
 def startJpgToGif():
@@ -83,31 +84,39 @@ if __name__ == '__main__':
     Label(window, text="gif保存路径:").grid(row=0, column=0)
     Label(window, text=savePath).grid(row=0, column=1)
     Button(window, text="选择目录", command=selectSavePath).grid(row=0, column=2)
-    # 按钮
-    Button(window, text="选择文件", command=selectFile).grid(row=1, column=2)
+    # 第二行 按钮
     Label(window, text='一共' + str(totalFrameCount) + '帧').grid(row=1, column=0)
+    Button(window, text="选择文件", command=selectFile).grid(row=1, column=2)
 
     # Label(window, text="目标路径:").grid(row=2, column=0)
     # Entry(window, textvariable=path).grid(row=1, column=1)
 
-    # 第二行
+    # 第3行
     Label(window, text="开始帧:").grid(row=2, column=0)
+    # 第4行
     Label(window, text="隔多少帧截取一个片段:").grid(row=3, column=0)
-    # 第三行
+    # 第5行
     Label(window, text="一个片段中隔多少帧截取:").grid(row=4, column=0)
+    # 第6行
+    Label(window, text="一共多少帧:").grid(row=5, column=0)
+
+    # 第三行输入框
     startFrame = Entry(window)
-    frame = Entry(window)
     startFrame.grid(row=2,column=1)
 
-    # 给第3行添加输入框
+    # 给第4行添加输入框
+    frame = Entry(window)
     frame.grid(row=3, column=1)
-    # 给第3行添加输入框
+    # 给第5行添加输入框
     frame2 = Entry(window)
     frame2.grid(row=4, column=1)
+    # 给第6行添加输入框
+    frameTotalBox = Entry(window)
+    frameTotalBox.grid(row=5, column=1)
 
     # Button(window, text="选择文件夹", command=selectPath).grid(row=1, column=2)
-    Button(window, text="开始抽帧", command=startGif).grid(row=5, column=0)
-    Button(window, text="开始合成gif", command=startJpgToGif).grid(row=6, column=0)
+    Button(window, text="开始抽帧", command=startGif).grid(row=6, column=0)
+    Button(window, text="开始合成gif", command=startJpgToGif).grid(row=7, column=0)
 
     window.mainloop()
 
